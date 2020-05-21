@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Страница пользователя {{ user.username }}{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="container pb-5 pt-5 rounded overflow-hidden">
+            {% if author is empty %}
+                <div class="container pb-5 pt-5 text-center rounded overflow-hidden">
+                    <h1>Такого пользователя не существует</h1>
+                </div>
+            {% else %}
+                <div class="profile-header">
+                    <div class="avatar-and-nick w-100 overflow-hidden mb-5 align-content-center row pl-4">
+                        <div class="avatar col-3">
+                            <img src="{{ author.avatar_photo.url }}" width="100%"
+                                 class="rounded float-left border-light bg-light "
+                                 alt="@supertux038_avatar">
+                        </div>
+                        <div class="text-user-headers col-6">
+                            <div class="nickname">
+                                <h2>Никнейм: {{ author.username }}</h2>
+                            </div>
+                            {#                            <%--                <div class="role">--%>#}
+                            {#                            <%--                    <h4>User</h4>--%>#}
+                            {#                            <%--                </div>--%>#}
+                        </div>
+                        {% if user == author %}
+                            <div class="edit-button col-3">
+                                <button class="btn float-right btn-light">Редактировать профиль</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if user == author %}
+                    <div class="upload-model mb-3 text-center">
+                        <form action="add-model">
+                            <button class="btn btn-light">Загрузить новую модель</button>
+                        </form>
+                    </div>
+                {% endif %}
+                {% if models %}
+                    <div class="no-models text-center">
+                        <h3>Список моделей пустой</h3>
+                    </div>
+                {% else %}
+                    <div class="d-flex row" id="models-2">
+                        {% for model in models %}
+                            <div class="col-xl-3 col-lg-4">
+                                <div class="card m-2">
+                                    <img class="card-img-top" src="{{ model.image.path }}"
+                                         alt="{{ model.name }}">
+                                    <div class="card-body">
+                                        <a class="model-page-link" href="model-page?id=${model.getId()}">
+                                            <h5 class="card-title">{{ model.name }}</h5>
+                                        </a>
+                                        <p class="card-text">{{ model.small_description }}</p>
+                                        <a href="update-model?id={{ model.id }}"
+                                           class="btn btn-primary">Редактировать</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {#            <%--#}
+                {#            <div class="d-flex row" id="models-2">--%>#}
+                {#                <%--#}
+                {#                <div class="col-xl-3 col-lg-4">--%>#}
+                {#                    <%--#}
+                {#                    <div class="card m-2">--%>#}
+                {#                        <%-- <img class="card-img-top" src="img/renders/86lp.png" alt="AE 86">--%>#}
+                {#                        <%--#}
+                {#                        <div class="card-body">--%>#}
+                {#                            <%-- <a class="model-page-link" href="#">--%>#}
+                {#                                <%-- <h5 class="card-title">AE 86</h5>--%>#}
+                {#                                <%-- </a>--%>#}
+                {#                            <%-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.#}
+                {#                                Excepturi,--%>#}
+                {#                                <%-- suscipit.</p>--%>#}
+                {#                            <%-- <a href="#" class="btn btn-primary">Редактировать</a>--%>#}
+                {#                            <%--#}
+                {#                        </div>#}
+                {#                        --%>#}
+                {#                        <%--#}
+                {#                    </div>#}
+                {#                    --%>#}
+                {#                    <%--#}
+                {#                </div>#}
+                {#                --%>#}
+                {#                <%--#}
+                {#            </div>--%>#}
+
+                {% if user == author %}
+                    <div class="logout-button text-center mt-5">
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-dark" type="submit">Выйти</button>
+                        </form>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+
+        </div>
+
+    </main>
+{% endblock %}

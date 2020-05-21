@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Sign Up
+{% endblock %}
+
+{% load static %}
+{% block content %}
+    <main>
+        {% load crispy_forms_tags %}
+
+        <div class="container w-25 py-3 px-4" id="login_form">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="form-check mb-3">
+                        <input class="form-check-input ${agreement}" type="checkbox" value="agree" name="agreement"
+                               id="agreement-check" required>
+                        <label class="form-check-label" for="agreement-check">
+                            Я даю согласие на обработку персональных данных
+                        </label>
+                    </div>
+                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

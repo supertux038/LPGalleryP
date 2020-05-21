@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
+    <div class="container-fluid">
+        {#        <c:url value="/main" />#}
+
+        <a class="navbar-brand" href={% url 'main' %}>
+
+            <img src="/media/images/logo/applesForLogo.png" width="40" height="40"
+                 class="d-inline-block d-sm-none d-md-inline align-top" alt="">
+            <span>Low-Poly gallery</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!--                <li class="nav-item active">-->
+                <!--                    <a class="nav-link" href="gallery.html">Выставка <span class="sr-only">(current)</span></a>-->
+                <!--                </li>-->
+                {#<%--                <li class="nav-item">--%>#}
+                {#<%--                    <a class="nav-link" href="#">Туториалы</a>--%>#}
+                {#<%--                </li>--%>#}
+                <li class="nav-item">
+                    {#                    ${pageContext.request.contextPath}/authors#}
+
+                    {#                    <a class="nav-link" href="{{ fullUri("/authors") }}">Авторы</a>#}
+
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/userPage/{{ user.username }}">Мои модели</a>
+                        {#                    ${pageContext.request.contextPath}/${lk_link}#}
+                        {#                    <a class="nav-link" href="">Мои модели</a>#}
+                    </li>
+                {% endif %}
+                <li>
+                    <a class="nav-link" href="{% url 'communities' %}">Сообщества</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{% url 'authors' %}">Авторы</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" id="find-user">
+                <input class="form-control mr-sm-2 disabled" type="search" placeholder="Найти автора"
+                       aria-label="Search" id="author-username">
+                <button class="btn btn-outline-success my-2 mr-sm-2 mr-5" type="submit">Поиск</button>
+            </form>
+            {% if not user.is_authenticated %}
+                <form action="{% url 'login' %}">
+                    <button class="btn btn-secondary my-2 mr-sm-2" type="submit">Войти</button>
+                </form>
+            {% else %}
+                <form action="{% url 'logout' %}">
+                    <button class="btn btn-secondary my-2 mr-sm-2" type="submit">Выйти</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        $("#find-user").submit(function (event) {
+            event.preventDefault();
+            let username = $("#author-username").val();
+            if (username === "") {
+                window.location.replace("/authors");
+            } else {
+                window.location.replace("/userPage/" + username);
+            }
+        });
+    </script>
+</nav>
