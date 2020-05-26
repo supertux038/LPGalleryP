@@ -27,7 +27,9 @@
                         </div>
                         {% if user == author %}
                             <div class="edit-button col-3">
-                                <button class="btn float-right btn-light">Редактировать профиль</button>
+                                <form action="{% url 'gallery:edit_profile' %}">
+                                    <button class="btn float-right btn-light">Редактировать профиль</button>
+                                </form>
                             </div>
                         {% endif %}
                     </div>

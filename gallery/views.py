@@ -1,21 +1,15 @@
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
-from django.conf import settings
-from django.urls import reverse, reverse_lazy
-from django.views import View, generic
-from django.views.generic import ListView
+from django.views import generic
+from django.views.generic import ListView, UpdateView
 
 from LPGallery import env_settings as _env
-
-from gallery.forms import LPModelForm
-from gallery.models import User, MainPage
-
+from gallery.forms import LPModelForm, UpdateUserForm
 from gallery.models import LPModel
+from gallery.models import User, MainPage
 
 
 @login_required
@@ -62,6 +56,12 @@ class AuthorList(ListView):
     context_object_name = 'authors'
 
 
+class UserUpdate(UpdateView):
+    model = User
+    fields = ['info', 'avatar_photo']
+    template_name_suffix = '_update_form'
+
+
 class AddModelView(LoginRequiredMixin, generic.FormView):
     form_class = LPModelForm
     template_name = 'gallery/add-model-test.html'
@@ -83,3 +83,23 @@ def page_not_found_test(request):
 
 def internal_server_error_test(request):
     return render(request, '500.html')
+
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = UpdateUserForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('gallery:user_page', request.user)
+
+    else:
+        form = UpdateUserForm(request.user)
+        return render(request, 'gallery/edit-user.html', {'form': form})
+
+
+def remove_model(request, model_id):
+    lp_model = LPModel.objects.get(id=model_id)
+    if lp_model.author == request.user:
+        lp_model.delete()
+    return redirect('gallery:user_page', request.user)

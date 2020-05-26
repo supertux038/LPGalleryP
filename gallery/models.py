@@ -29,7 +29,7 @@ class LPModel(models.Model):
     description = models.CharField(max_length=100)
     small_description = models.CharField(max_length=40)
     file = models.FileField(upload_to=settings.USER_MODEL_DIRECTORY, default=settings.USER_MODEL_DIRECTORY+'404.babylon',
-                            blank=False, null=False, validators=[FileExtensionValidator(allowed_extensions=['babylon'])])
+                            blank=False, null=False)
     video_lesson_link = models.URLField(max_length=100, blank=True)
     image = models.ImageField(upload_to=settings.USER_MODEL_IMAGE_DIRECTORY,
                               default=settings.USER_MODEL_IMAGE_DIRECTORY+'/default.jpg', blank=False,
@@ -51,6 +51,8 @@ class LPModel(models.Model):
             '-difficulty',
             '-category'
         ]
+        verbose_name = 'LowPoly Model'
+        verbose_name_plural = 'LowPoly Models'
 
 
 class MainPage(models.Model):

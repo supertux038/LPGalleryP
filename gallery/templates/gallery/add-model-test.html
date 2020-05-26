@@ -8,9 +8,8 @@
         {% load crispy_forms_tags %}
         <div class="container h-auto rounded py-3 px-4">
 
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="hidden" name="author" value="{{ user }}">
                 {{ form|crispy }}
                 <button type="submit" class="btn btn-primary">Добавить модель</button>
             </form>

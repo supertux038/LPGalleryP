@@ -136,14 +136,16 @@
                 </div>
             </div>
             {% endif %}
+        {% ifequal model.author user %}
             <div class="delete-model mb-3">
-                <form action="delete" method="post" name="delete_model">
-                    <input hidden type="text" name="id" value="${model.getId()}">
+                <form action="{% url 'gallery:remove_model' model.id %}" method="post" name="delete_model">
+                    {% csrf_token %}
                     <div class="logout-button text-center mt-5">
                         <button class="btn btn-dark" type="submit">Удалить</button>
                     </div>
                 </form>
             </div>
+        {% endifequal %}
         </div>
 
     </main>

@@ -10,7 +10,7 @@ from security.forms import RegistrationForm
 
 class RegisterView(View):
     def get(self, request):
-        return render(request, 'gallery/registration.html', {'form': RegistrationForm})
+        return render(request, 'security/registration.html', {'form': RegistrationForm})
 
     def post(self, request):
         form = RegistrationForm(request.POST, request.FILES)
@@ -19,12 +19,12 @@ class RegisterView(View):
             form.save_m2m()
             return redirect(reverse('security:login'))
 
-        return render(request, 'gallery/registration.html', {'form': form})
+        return render(request, 'security/registration.html', {'form': form})
 
 
 class LoginView(View):
     def get(self, request):
-        return render(request, 'gallery/login.html', {'form': AuthenticationForm})
+        return render(request, 'security/login.html', {'form': AuthenticationForm})
 
     def post(self, request):
         form = AuthenticationForm(request, data=request.POST)
@@ -38,7 +38,7 @@ class LoginView(View):
             if user is None:
                 return render(
                     request,
-                    'gallery/login.html',
+                    'security/login.html',
                     {'form': form, 'invalid_creds': True}
                 )
 
@@ -47,14 +47,14 @@ class LoginView(View):
             except ValidationError:
                 return render(
                     request,
-                    'gallery/login.html',
+                    'security/login.html',
                     {'form': form, 'invalid_creds': True}
                 )
             login(request, user)
 
             return redirect(reverse('gallery:main'))
         else:
-            return render(request, 'gallery/login.html', {'form': form})
+            return render(request, 'security/login.html', {'form': form})
 
 
 def logout_func(request):

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Авторы{% endblock %}
+{% block title %}Модели{% endblock %}
 
 {% block content %}
     <main>
@@ -18,11 +18,11 @@
                                                      alt="{{ model.name }}_image">
                                             </div>
                                             <div class="author-name text-center col-8 pt-4">
-                                                <a href="{% url 'model' model.id %}">
+                                                <a href="{% url 'gallery:model' model.id %}">
                                                     <h3>{{ model.name }}</h3>
                                                 </a>
-                                                <a href="Автор: {% url 'user_page' model.id %}">
-                                                    {{ model.author.username }}
+                                                <a href="{% url 'gallery:user_page' model.author.username %}">
+                                                    Автор: {{ model.author.username }}
                                                 </a>
                                                 <p class="mt-2">Сложность: <b>{{ model.get_difficulty_display }}</b>
                                                     Категория: <b>{{ model.get_category_display }}</b></p>
