@@ -31,21 +31,23 @@
                     camera.wheelPrecision = 50;
 
 
-                    // showWorldAxis(10);
+
 
 
                     // Add lights to the scene
-                    var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(20, 10, 20), scene);
-                    // var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(20, 10, -20), scene);
-                    // var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-20, 10, 20), scene);
-                    var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-20, 10, -20), scene);
-                    BABYLON.SceneLoader.ImportMesh("", "/media/user-data/models/", "ae86_3.babylon", scene);
+                    var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(10, 10, 10), scene);
+                    {#var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(20, 10, -20), scene);#}
+                    {#var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-20, 10, 20), scene);#}
+                    var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-10, 10, -10), scene);
+                    BABYLON.SceneLoader.ImportMesh("", "/media/user-data/models/", "{{ model.filename }}", scene);
 
                     return scene;
                 };
                 /******* End of the create scene function ******/
 
                 let scene = createScene(); //Call the createScene function
+
+                showWorldAxis(10);
 
 // Register a render loop to repeatedly render the scene
                 engine.runRenderLoop(function () {
@@ -116,22 +118,24 @@
             <div class="mb-5 model-block border-0">
                 <canvas class="align-content-center w-100 h-100" id="canvas" style="overflow: auto"></canvas>
             </div>
-            <div class="row mb-5">
+            <div class="row mb-5 center">
                 <h5 class="col-3">
-                    Сложность: {{ model.difficulty }}
+                    Сложность: {{ model.get_difficulty_display }}
 {#                    Сложность: Легкая#}
                 </h5>
                 <h5 class="col-3">
-                    Категория: {{ model.category }}
+                    Категория: {{ model.get_category_display }}
                 </h5>
             </div>
-            <div class="video m mb-1">
+            {% if model.video_lesson_link %}
+            <div class="video m mb-1 text-center">
                 <h3 class="mb-3">Видео</h3>
-                <div class="embed-responsive embed-responsive-16by9">
+                <div class="embed-responsive-16by9 embed-responsive w-75 h-75 mx-auto">
                     <iframe class="embed-responsive-item w-100 h-100"
-                            src="https://www.youtube.com/embed/Zkg7Ol2jEjs" allowfullscreen></iframe>
+                            src="{{ model.video_lesson_link }}" allowfullscreen></iframe>
                 </div>
             </div>
+            {% endif %}
             <div class="delete-model mb-3">
                 <form action="delete" method="post" name="delete_model">
                     <input hidden type="text" name="id" value="${model.getId()}">

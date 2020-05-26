@@ -14,16 +14,16 @@
                             <h5>Категории</h5>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled md" href="#">Общее</a>
+                            <a class="nav-link md" href="{% url 'gallery:models' param='category' argument='О' %}">Общее</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Транспорт</a>
+                            <a class="nav-link" href="{% url 'gallery:models' param='category' argument='Т' %}">Транспорт</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Ландшафт</a>
+                            <a class="nav-link" href="{% url 'gallery:models' param='category' argument='Л' %}">Ландшафт</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Персонажи</a>
+                            <a class="nav-link" href="{% url 'gallery:models' param='category' argument='П' %}">Персонажи</a>
                         </li>
                     </ul>
                     <ul class="nav flex-column pt-4 pl-sm-5 pl-lg-0">
@@ -31,55 +31,64 @@
                             <h5>Сложность</h5>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Неоцененные</a>
+                            <a class="nav-link"
+                               href="{% url 'gallery:models' param='difficulty' argument='Н' %}">Неоцененные</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Простые</a>
+                            <a class="nav-link" href="{% url 'gallery:models' param='difficulty' argument='Л' %}">Легкие</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Средней сложности</a>
+                            <a class="nav-link" href="{% url 'gallery:models' param='difficulty' argument='С' %}">Средние</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Сложные</a>
+                            <a class="nav-link" href="{% url 'gallery:models' param='difficulty' argument='Т' %}">Тяжелые</a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-lg-9 col-xl-10 main-content overflow-hidden">
-                    <h3 class="pt-5 pb-3" id="best-examples-title">Лучшие по мнению администрации <span
-                                class="badge badge-secondary">Появится в будущих обновлениях</span></h3>
+                    <h3 class="pt-5 pb-3" id="best-examples-title">Лучшие по мнению администрации
+                        {#                        <span class="badge badge-secondary">Появится в будущих обновлениях</span>#}
+                    </h3>
                     <div class="models-rendres-slider pb-lg-5">
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
-                                <a href="/model/id1">
-                                    <div class="carousel-item active">
-                                        <img class="d-block w-100" src="/media/images/renders/86lp.png"
-                                             alt="First slide">
+                                {% if models %}
+                                    {% for model in models %}
+                                        <a href="{% url 'gallery:model' model.id %}">
+                                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                                <img class="d-block w-100" src="{{ model.image.url }}"
+                                                     alt="First slide">
+                                                <div class="carousel-caption d-none d-md-block">
+                                                    <h5>{{ model.name }}</h5>
+                                                    <p>Автор
+                                                        <a href="{% url 'gallery:user_page' model.author.username %}">@{{ model.author.username }}</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    {% endfor %}
+
+
+                                {% else %}
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100"
+                                             src="/media/images/renders/sheep.png"
+                                             alt="Second slide">
                                         <div class="carousel-caption d-none d-md-block">
-                                            <h5>AE 86</h5>
-                                            <p>Автор
-                                                <a href="${pageContext.request.contextPath}/user?id=11">@supertux038</a>
-                                            </p>
+                                            <h5>Овечка</h5>
+                                            <p>Автор @anonimus</p>
                                         </div>
                                     </div>
-                                </a>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100"
-                                         src="/media/images/renders/sheep.png"
-                                         alt="Second slide">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Овечка</h5>
-                                        <p>Автор @anonimus</p>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100"
+                                             src="/media/images/renders/FF.png"
+                                             alt="Second slide">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Горный берег</h5>
+                                            <p>Автор @supertux038</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100"
-                                         src="/media/images/renders/FF.png"
-                                         alt="Second slide">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Горный берег</h5>
-                                        <p>Автор @supertux038</p>
-                                    </div>
-                                </div>
+                                {% endif %}
                                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
                                    data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -93,79 +102,88 @@
                             </div>
                         </div>
                     </div>
+                    <h4 class="py-3">{{ main_page.title }}</h4>
+                    <p>{{ main_page.text }}</p>
+
                     <h4 class="py-3" id="descriptions-title">Описания</h4>
                     <div class="accordion mb-5" id="descriptions">
-                        <div class="card">
-                            <div class="card-header" id="headingOne">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse"
-                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        AE 86
-                                    </button>
-                                </h5>
-                            </div>
+                        {% if models %}
+                            {% for model in models %}
+                                <div class="card">
+                                    <div class="card-header" id="heading{{ forloop.counter }}">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                    data-target="#collapse{{ forloop.counter }}" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                {{ model.name }}
+                                            </button>
+                                        </h5>
+                                    </div>
 
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
-                                 data-parent="#descriptions">
-                                <div class="card-body">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, accusantium
-                                    alias
-                                    culpa dolores earum ipsa molestias sit tempore. Amet aut cupiditate est facere
-                                    illum,
-                                    impedit ipsam laboriosam, laborum laudantium libero magni minima nulla, provident
-                                    repellendus saepe sapiente suscipit tenetur vitae!
+                                    <div id="collapse{{ forloop.counter }}" class="collapse"
+                                         aria-labelledby="heading{{ forloop.counter }}"
+                                         data-parent="#descriptions">
+                                        <div class="card-body">
+                                            {{ model.description }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseTwo" aria-expanded="false"
+                                                aria-controls="collapseTwo">
+                                            Какой-то овечки
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                     data-parent="#descriptions">
+                                    <div class="card-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cupiditate
+                                        delectus
+                                        distinctio doloribus ducimus eligendi enim eveniet facilis hic ipsam ipsum non
+                                        officiis,
+                                        pariatur placeat soluta vel vitae voluptas voluptate.
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="headingTwo">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                            data-target="#collapseTwo" aria-expanded="false"
-                                            aria-controls="collapseTwo">
-                                        Какой-то овечки
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                 data-parent="#descriptions">
-                                <div class="card-body">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cupiditate
-                                    delectus
-                                    distinctio doloribus ducimus eligendi enim eveniet facilis hic ipsam ipsum non
-                                    officiis,
-                                    pariatur placeat soluta vel vitae voluptas voluptate.
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseThree" aria-expanded="false"
+                                                aria-controls="collapseThree">
+                                            Левитирующего острова
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                     data-parent="#descriptions">
+                                    <div class="card-body">
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                        richardson ad
+                                        squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food
+                                        truck
+                                        quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a
+                                        bird
+                                        on it
+                                        squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
+                                        helvetica,
+                                        craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
+                                        excepteur
+                                        butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                                        aesthetic
+                                        synth
+                                        nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="headingThree">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                            data-target="#collapseThree" aria-expanded="false"
-                                            aria-controls="collapseThree">
-                                        Левитирующего острова
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                 data-parent="#descriptions">
-                                <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                    richardson ad
-                                    squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
-                                    quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                                    on it
-                                    squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-                                    helvetica,
-                                    craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
-                                    excepteur
-                                    butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-                                    synth
-                                    nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-                            </div>
-                        </div>
+                        {% endif %}
+
                     </div>
                     <div class="contnent mb-5">
                         <h4 class="py-3" id="some-text-title">{{ textTitle }}</h4>
@@ -179,7 +197,7 @@
                             </div>
                         {% endif %}
                     </div>
-                    <h4 class="mb-3" id="lessons-title">Модели</h4>
+                    <h4 class="mb-3" id="lessons-title">Уроки</h4>
                     <div class="mb-5 d-flex row" id="lessons">
                         <div class="col-3">
                             <div class="card">
@@ -189,13 +207,14 @@
                                     <p class="card-text">Создаем модельку с нуля с помощью чертежа и простейших операций
                                         с
                                         мешем</p>
-                                    <a href="/model-page" class="btn btn-primary">Открыть страницу</a>
+                                    <a href="/model-page" class="btn btn-primary disabled">Открыть урок</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="card">
-                                <img class="card-img-top" src="/media/user-data/images/renders/FF.png" alt="LP landscape">
+                                <img class="card-img-top" src="/media/user-data/images/renders/FF.png"
+                                     alt="LP landscape">
                                 <div class="card-body">
                                     <h5 class="card-title">Пейзаж</h5>
                                     <p class="card-text">Создаем низкополигональный пейзаж с деревьями, океаном и

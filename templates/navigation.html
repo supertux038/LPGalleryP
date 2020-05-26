@@ -2,7 +2,7 @@
     <div class="container-fluid">
         {#        <c:url value="/main" />#}
 
-        <a class="navbar-brand" href={% url 'main' %}>
+        <a class="navbar-brand" href={% url 'gallery:main' %}>
 
             <img src="/media/images/logo/applesForLogo.png" width="40" height="40"
                  class="d-inline-block d-sm-none d-md-inline align-top" alt="">
@@ -34,10 +34,13 @@
                     </li>
                 {% endif %}
                 <li>
-                    <a class="nav-link" href="{% url 'communities' %}">Сообщества</a>
+                    <a class="nav-link" href="{% url 'gallery:communities' %}">Сообщества</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="{% url 'authors' %}">Авторы</a>
+                    <a class="nav-link" href="{% url 'gallery:authors' %}">Авторы</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{% url 'gallery:models' %}">Модели</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0" id="find-user">
@@ -46,11 +49,11 @@
                 <button class="btn btn-outline-success my-2 mr-sm-2 mr-5" type="submit">Поиск</button>
             </form>
             {% if not user.is_authenticated %}
-                <form action="{% url 'login' %}">
+                <form action="{% url 'security:login' %}">
                     <button class="btn btn-secondary my-2 mr-sm-2" type="submit">Войти</button>
                 </form>
             {% else %}
-                <form action="{% url 'logout' %}">
+                <form action="{% url 'security:logout' %}">
                     <button class="btn btn-secondary my-2 mr-sm-2" type="submit">Выйти</button>
                 </form>
             {% endif %}

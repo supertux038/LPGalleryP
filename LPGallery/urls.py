@@ -23,7 +23,8 @@ from rest_framework import permissions
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('gallery.urls'), name='gallery'),
+    path('', include(('security.urls', 'security'), namespace='security')),
+    path('', include(('gallery.urls', 'gallery'), namespace='gallery')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -53,5 +54,5 @@ urlpatterns += [
     # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
-handler500 = 'gallery.views.internal_server_error'
-handler404 = 'gallery.views.page_not_found'
+handler500 = 'security.views.internal_server_error'
+handler404 = 'security.views.page_not_found'

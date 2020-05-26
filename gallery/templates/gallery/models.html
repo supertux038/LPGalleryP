@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Авторы{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="container py-5 text-center rounded overflow-hidden">
+            {% if models %}
+                <ul id="models">
+                    {% for model in models %}
+                        <li>
+                            <div class="container">
+                                <label>
+                                    <div class="model">
+                                        <div class="row">
+                                            <div class="avatar col-4">
+                                                <img src="{{ model.image.url }}" width="100%"
+                                                     class="rounded float-left border-light bg-light "
+                                                     alt="{{ model.name }}_image">
+                                            </div>
+                                            <div class="author-name text-center col-8 pt-4">
+                                                <a href="{% url 'model' model.id %}">
+                                                    <h3>{{ model.name }}</h3>
+                                                </a>
+                                                <a href="Автор: {% url 'user_page' model.id %}">
+                                                    {{ model.author.username }}
+                                                </a>
+                                                <p class="mt-2">Сложность: <b>{{ model.get_difficulty_display }}</b>
+                                                    Категория: <b>{{ model.get_category_display }}</b></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="mb-3">
+                    <h1>На сайте еще нет моделей</h1>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+{% endblock %}

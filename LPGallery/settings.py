@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gallery.apps.GalleryConfig',
+    'security.apps.SecurityConfig',
     'rest_framework',
     'drf_yasg',
     'crispy_forms'
@@ -121,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'gallery.User'
+AUTH_USER_MODEL = 'security.User'
 
 LOGIN_REDIRECT_URL = reverse_lazy('gallery:main')
 LOGIN_URL = '/login/'
@@ -130,7 +131,7 @@ LOGIN_URL = '/login/'
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'Europe/Moscow'
 
@@ -150,3 +151,4 @@ MEDIA_URL = '/media/'
 
 USER_AVATAR_DIRECTORY = 'user-data/images/avatars/'
 USER_MODEL_DIRECTORY = 'user-data/models'
+USER_MODEL_IMAGE_DIRECTORY = 'user-data/images/renders'

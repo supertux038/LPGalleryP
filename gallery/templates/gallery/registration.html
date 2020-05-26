@@ -14,12 +14,12 @@
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="form-check mb-3">
-                        <input class="form-check-input ${agreement}" type="checkbox" value="agree" name="agreement"
-                               id="agreement-check" required>
-                        <label class="form-check-label" for="agreement-check">
-                            Я даю согласие на обработку персональных данных
-                        </label>
-                    </div>
+                    <input class="form-check-input" type="checkbox" value="agree" name="agreement"
+                           id="agreement-check" required>
+                    <label class="form-check-label" for="agreement-check">
+                        Я даю согласие на обработку персональных данных
+                    </label>
+                </div>
                 <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
             </form>
         </div>

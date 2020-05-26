@@ -6,6 +6,7 @@
 <main>
     <div class="container h-auto rounded">
         <form name="add_model" class="pt-5" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <!--            name                     -->
             <input class="form-control form-control-lg col-3 mb-3" type="text" name="name" placeholder="Название модели"
                    value="" required>

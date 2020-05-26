@@ -10,88 +10,50 @@ from django.urls import reverse, reverse_lazy
 from django.views import View, generic
 from django.views.generic import ListView
 
-from gallery.forms import RegistrationForm, LPModelForm
-from gallery.models import User
+from LPGallery import env_settings as _env
+
+from gallery.forms import LPModelForm
+from gallery.models import User, MainPage
 
 from gallery.models import LPModel
-
-
-class RegisterView(View):
-    def get(self, request):
-        return render(request, 'gallery/sign-up.html', {'form': RegistrationForm()})
-
-    def post(self, request):
-        form = RegistrationForm(request.POST, request.FILES)
-        if form.is_valid():
-            user = form.save(True)
-            form.save_m2m()
-            return redirect(reverse('login'))
-
-        return render(request, 'gallery/registration.html', {'form': form})
-
-
-class LoginView(View):
-    def get(self, request):
-        return render(request, 'gallery/login.html', {'form': AuthenticationForm})
-
-    def post(self, request):
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = authenticate(
-                request,
-                username=form.cleaned_data.get('username'),
-                password=form.cleaned_data.get('password')
-            )
-
-            if user is None:
-                return render(
-                    request,
-                    'gallery/login.html',
-                    {'form': form, 'invalid_creds': True}
-                )
-
-            try:
-                form.confirm_login_allowed(user)
-            except ValidationError:
-                return render(
-                    request,
-                    'gallery/login.html',
-                    {'form': form, 'invalid_creds': True}
-                )
-            login(request, user)
-
-            return redirect(reverse('main'))
-
-
-def logout_func(request):
-    logout(request)
-    return redirect('main')
 
 
 @login_required
 def user_page(request, username):
     try:
         user = User.objects.get(username=username)
-        models = LPModel.objects.filter(author=user)
-        return render(request, 'gallery/user-page.html', {'author': user})
+        lp_models = LPModel.objects.filter(author=user)
+        return render(request, 'gallery/user-page.html', {'author': user, 'models': lp_models})
     except ObjectDoesNotExist:
         return render(request, 'gallery/user-not-exists.html')
 
 
 def main(request):
-    print(settings.USER_AVATAR_DIRECTORY)
-    return render(request, 'gallery/main.html', {})
+    main_page = MainPage.objects.get(name=_env.MAIN_PAGE)
+    lp_models = LPModel.objects.filter(main_page=main_page.id)
+    return render(request, 'gallery/main.html', {'main_page': main_page, 'models': lp_models})
 
 
 def model(request, num):
-    print(num)
-    lp_model = LPModel(name='AE86', description='Описание из вьюхи', difficulty='Легкое',
-                       category='Транспорт')
+    lp_model = LPModel.objects.get(id=num)
     return render(request, 'gallery/model-page.html', {'model': lp_model})
 
 
 def communities(request):
     return render(request, '500.html')
+
+
+def models(request, param=None, argument=None):
+    if param is not None:
+        if param == 'category':
+            lp_models = LPModel.objects.filter(category=argument)
+        elif param == 'difficulty':
+            lp_models = LPModel.objects.filter(difficulty=argument)
+        else:
+            lp_models = None
+    else:
+        lp_models = LPModel.objects.all()
+    return render(request, 'gallery/models.html', {'models': lp_models})
 
 
 class AuthorList(ListView):
@@ -102,14 +64,22 @@ class AuthorList(ListView):
 
 class AddModelView(LoginRequiredMixin, generic.FormView):
     form_class = LPModelForm
-    template_name = 'gallery/add-model.html'
-    # success_url = reverse_lazy('user-page', self.request.user.username)
+    template_name = 'gallery/add-model-test.html'
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.author = user
+        lp_model = form.save()
+        return redirect('gallery:user_page', user)
 
 
-def page_not_found(request, exception):
-    # print(exception)
+# def add_comment(request):
+#     if
+
+
+def page_not_found_test(request):
     return render(request, '404.html')
 
 
-def internal_server_error(request):
+def internal_server_error_test(request):
     return render(request, '500.html')

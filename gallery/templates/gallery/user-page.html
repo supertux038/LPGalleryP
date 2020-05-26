@@ -34,33 +34,33 @@
                 </div>
                 {% if user == author %}
                     <div class="upload-model mb-3 text-center">
-                        <form action="add-model">
+                        <form action="{% url 'gallery:add_model' user.username %}">
                             <button class="btn btn-light">Загрузить новую модель</button>
                         </form>
                     </div>
                 {% endif %}
                 {% if models %}
-                    <div class="no-models text-center">
-                        <h3>Список моделей пустой</h3>
-                    </div>
-                {% else %}
                     <div class="d-flex row" id="models-2">
                         {% for model in models %}
                             <div class="col-xl-3 col-lg-4">
                                 <div class="card m-2">
-                                    <img class="card-img-top" src="{{ model.image.path }}"
+                                    <img class="card-img-top" src="{{ model.image.url }}"
                                          alt="{{ model.name }}">
                                     <div class="card-body">
-                                        <a class="model-page-link" href="model-page?id=${model.getId()}">
+                                        <a class="model-page-link" href="{% url 'gallery:model' model.id %}">
                                             <h5 class="card-title">{{ model.name }}</h5>
                                         </a>
                                         <p class="card-text">{{ model.small_description }}</p>
-                                        <a href="update-model?id={{ model.id }}"
+                                        <a href="editModel/{{ model.id }}"
                                            class="btn btn-primary">Редактировать</a>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="no-models text-center">
+                        <h3>Список моделей пустой</h3>
                     </div>
                 {% endif %}
                 {#            <%--#}
@@ -93,7 +93,7 @@
 
                 {% if user == author %}
                     <div class="logout-button text-center mt-5">
-                        <form action="{% url 'logout' %}" method="post">
+                        <form action="{% url 'security:logout' %}" method="post">
                             {% csrf_token %}
                             <button class="btn btn-dark" type="submit">Выйти</button>
                         </form>
