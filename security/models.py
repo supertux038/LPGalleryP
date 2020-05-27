@@ -29,6 +29,9 @@ class User(AbstractUser):
     def is_admin(self):
         return Role(name='A') in list(self.roles.all())
 
+    # def get_models(self):
+    #     return LPModel.objects.filter(author=self)
+
     class Meta:
         ordering = [
             '-username'

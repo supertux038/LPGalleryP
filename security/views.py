@@ -4,8 +4,11 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
+from rest_framework import viewsets, permissions
 
 from security.forms import RegistrationForm
+from security.models import User
+from security.serializers import UserSerializer
 
 
 class RegisterView(View):
@@ -55,6 +58,12 @@ class LoginView(View):
             return redirect(reverse('gallery:main'))
         else:
             return render(request, 'security/login.html', {'form': form})
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('-username')
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 def logout_func(request):

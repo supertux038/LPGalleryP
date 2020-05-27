@@ -4,150 +4,179 @@
 {#{% block title %}AE86{% endblock %}#}
 
 {% block header %}
-{#    <script src="/js/Babylon/babylon.max.js"></script>#}
+    {#    <script src="/js/Babylon/babylon.max.js"></script>#}
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
 {% endblock %}
 
 {% block content %}
     <script>
-            window.addEventListener('DOMContentLoaded', function () {
-                var canvas = document.getElementById("canvas"); // Get the canvas element
-                var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
+        window.addEventListener('DOMContentLoaded', function () {
+            var canvas = document.getElementById("canvas"); // Get the canvas element
+            var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
-                var height = 1;
-                var widht = 2;
-                var length = 3;
+            var height = 1;
+            var widht = 2;
+            var length = 3;
 
-                /******* Add the create scene function ******/
-                let createScene = function () {
+            /******* Add the create scene function ******/
+            let createScene = function () {
 
-                    // Create the scene space
-                    var scene = new BABYLON.Scene(engine);
-                    engine.enableOfflineSupport = false;
-                    // Add a camera to the scene and attach it to the canvas
-                    var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, new BABYLON.Vector3(0, 0, 0), scene);
-                    camera.setPosition(new BABYLON.Vector3(4, 2, -3));
-                    camera.attachControl(canvas, true);
-                    camera.wheelPrecision = 50;
-
-
+                // Create the scene space
+                var scene = new BABYLON.Scene(engine);
+                engine.enableOfflineSupport = false;
+                // Add a camera to the scene and attach it to the canvas
+                var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, new BABYLON.Vector3(0, 0, 0), scene);
+                camera.setPosition(new BABYLON.Vector3(4, 2, -3));
+                camera.attachControl(canvas, true);
+                camera.wheelPrecision = 50;
 
 
+                // Add lights to the scene
+                var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(10, 10, 10), scene);
+                {#var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(20, 10, -20), scene);#}
+                {#var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-20, 10, 20), scene);#}
+                var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-10, 10, -10), scene);
+                BABYLON.SceneLoader.ImportMesh("", "/media/user-data/models/", "{{ model.filename }}", scene);
 
-                    // Add lights to the scene
-                    var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(10, 10, 10), scene);
-                    {#var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(20, 10, -20), scene);#}
-                    {#var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-20, 10, 20), scene);#}
-                    var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(-10, 10, -10), scene);
-                    BABYLON.SceneLoader.ImportMesh("", "/media/user-data/models/", "{{ model.filename }}", scene);
+                return scene;
+            };
+            /******* End of the create scene function ******/
 
-                    return scene;
-                };
-                /******* End of the create scene function ******/
+            let scene = createScene(); //Call the createScene function
 
-                let scene = createScene(); //Call the createScene function
-
-                showWorldAxis(10);
+            {#showWorldAxis(10);#}
 
 // Register a render loop to repeatedly render the scene
-                engine.runRenderLoop(function () {
-                    scene.render();
-                });
+            engine.runRenderLoop(function () {
+                scene.render();
+            });
 
 // Watch for browser/canvas resize events
-                window.addEventListener("resize", function () {
-                    engine.resize();
-                });
-
-
-                function showWorldAxis(size) {
-                    var makeTextPlane = function (text, color, size) {
-                        var dynamicTexture = new BABYLON.DynamicTexture("DynamicTexture", 50, scene, true);
-                        dynamicTexture.hasAlpha = true;
-                        dynamicTexture.drawText(text, 5, 40, "bold 36px Arial", color, "transparent", true);
-                        var plane = BABYLON.Mesh.CreatePlane("TextPlane", size, scene, true);
-                        plane.material = new BABYLON.StandardMaterial("TextPlaneMaterial", scene);
-                        plane.material.backFaceCulling = false;
-                        plane.material.specularColor = new BABYLON.Color3(0, 0, 0);
-                        plane.material.diffuseTexture = dynamicTexture;
-                        return plane;
-                    };
-                    var axisX = BABYLON.Mesh.CreateLines("axisX", [
-                        BABYLON.Vector3.Zero(), new BABYLON.Vector3(size, 0, 0), new BABYLON.Vector3(size * 0.95, 0.05 * size, 0),
-                        new BABYLON.Vector3(size, 0, 0), new BABYLON.Vector3(size * 0.95, -0.05 * size, 0)
-                    ], scene);
-                    axisX.color = new BABYLON.Color3(1, 0, 0);
-                    var xChar = makeTextPlane("X", "red", size / 10);
-                    xChar.position = new BABYLON.Vector3(0.9 * size, -0.05 * size, 0);
-                    var axisY = BABYLON.Mesh.CreateLines("axisY", [
-                        BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, size, 0), new BABYLON.Vector3(-0.05 * size, size * 0.95, 0),
-                        new BABYLON.Vector3(0, size, 0), new BABYLON.Vector3(0.05 * size, size * 0.95, 0)
-                    ], scene);
-                    axisY.color = new BABYLON.Color3(0, 1, 0);
-                    var yChar = makeTextPlane("Y", "green", size / 10);
-                    yChar.position = new BABYLON.Vector3(0, 0.9 * size, -0.05 * size);
-                    var axisZ = BABYLON.Mesh.CreateLines("axisZ", [
-                        BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(0, -0.05 * size, size * 0.95),
-                        new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(0, 0.05 * size, size * 0.95)
-                    ], scene);
-                    axisZ.color = new BABYLON.Color3(0, 0, 1);
-                    var zChar = makeTextPlane("Z", "blue", size / 10);
-                    zChar.position = new BABYLON.Vector3(0, 0.05 * size, 0.9 * size);
-                };
+            window.addEventListener("resize", function () {
+                engine.resize();
             });
+
+
+            function showWorldAxis(size) {
+                var makeTextPlane = function (text, color, size) {
+                    var dynamicTexture = new BABYLON.DynamicTexture("DynamicTexture", 50, scene, true);
+                    dynamicTexture.hasAlpha = true;
+                    dynamicTexture.drawText(text, 5, 40, "bold 36px Arial", color, "transparent", true);
+                    var plane = BABYLON.Mesh.CreatePlane("TextPlane", size, scene, true);
+                    plane.material = new BABYLON.StandardMaterial("TextPlaneMaterial", scene);
+                    plane.material.backFaceCulling = false;
+                    plane.material.specularColor = new BABYLON.Color3(0, 0, 0);
+                    plane.material.diffuseTexture = dynamicTexture;
+                    return plane;
+                };
+                var axisX = BABYLON.Mesh.CreateLines("axisX", [
+                    BABYLON.Vector3.Zero(), new BABYLON.Vector3(size, 0, 0), new BABYLON.Vector3(size * 0.95, 0.05 * size, 0),
+                    new BABYLON.Vector3(size, 0, 0), new BABYLON.Vector3(size * 0.95, -0.05 * size, 0)
+                ], scene);
+                axisX.color = new BABYLON.Color3(1, 0, 0);
+                var xChar = makeTextPlane("X", "red", size / 10);
+                xChar.position = new BABYLON.Vector3(0.9 * size, -0.05 * size, 0);
+                var axisY = BABYLON.Mesh.CreateLines("axisY", [
+                    BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, size, 0), new BABYLON.Vector3(-0.05 * size, size * 0.95, 0),
+                    new BABYLON.Vector3(0, size, 0), new BABYLON.Vector3(0.05 * size, size * 0.95, 0)
+                ], scene);
+                axisY.color = new BABYLON.Color3(0, 1, 0);
+                var yChar = makeTextPlane("Y", "green", size / 10);
+                yChar.position = new BABYLON.Vector3(0, 0.9 * size, -0.05 * size);
+                var axisZ = BABYLON.Mesh.CreateLines("axisZ", [
+                    BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(0, -0.05 * size, size * 0.95),
+                    new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(0, 0.05 * size, size * 0.95)
+                ], scene);
+                axisZ.color = new BABYLON.Color3(0, 0, 1);
+                var zChar = makeTextPlane("Z", "blue", size / 10);
+                zChar.position = new BABYLON.Vector3(0, 0.05 * size, 0.9 * size);
+            };
+        });
 
 
     </script>
     <script>
-        $("#canvas").bind("wheel mousewheel", function (e) {
+        $("#canvas").bind("mousewheel", function (e) {
             e.preventDefault()
         });
     </script>
 
     <main>
-        <div class="container overflow-hidden">
+        <div class="container overflow-hidden text-center">
 
-            <h1 class="pt-5 pb-3"> {{ model.name }} </h1>
-{#            <h1 class="pt-5 pb-3"> AE86 </h1>#}
+            <h1 class="pt-5 pb-3 mx-auto"> {{ model.name }} </h1>
 
             <h3 class="pb-3">Описание</h3>
 
             <p>{{ model.description }}</p>
-{#            <p>Какое-то описание</p>#}
 
-            <div class="mb-5 model-block border-0">
+            <div class="mb-3 model-block border-0">
                 <canvas class="align-content-center w-100 h-100" id="canvas" style="overflow: auto"></canvas>
             </div>
             <div class="row mb-5 center">
+                <div class="col-3"></div>
                 <h5 class="col-3">
                     Сложность: {{ model.get_difficulty_display }}
-{#                    Сложность: Легкая#}
                 </h5>
                 <h5 class="col-3">
                     Категория: {{ model.get_category_display }}
                 </h5>
             </div>
+
+            <h3 class="pb-3">Комментарии</h3>
+            <div class="container comments mb-5">
+                {% if user.is_authenticated %}
+                    <form action="{% url 'gallery:add_comment' %}" method="post" class="mb-4">
+                        {% csrf_token %}
+                        <input type="hidden" name="on_model" value="{{ model.id }}">
+                        <textarea class="w-75" name="text" id="" cols="20" rows="3"></textarea>
+                        <div class="logout-button text-center mt-3">
+                            <button class="btn btn-light" type="submit">Оставить комментарий</button>
+                        </div>
+                    </form>
+                {% endif %}
+                {% if comments %}
+                    {% for comment in comments %}
+                        <div class="row py-2">
+                            <div class="avatar col-2 ml-2">
+                                <img src="{{ comment.author.avatar_photo.url }}" width="100%"
+                                     class="rounded float-left border-light bg-light "
+                                     alt="@{{ comment.author.username }}_avatar">
+                            </div>
+                            <div class="comment text-left col-9 my-1 ">
+                                <a href="{% url 'gallery:user_page' comment.author.username %}">
+                                    Отправитель: {{ comment.author.username }}
+                                </a>
+                                <p class="my-1 h-50">{{ comment.text }}</p>
+                                <p>{{ comment.creation_time }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
             {% if model.video_lesson_link %}
-            <div class="video m mb-1 text-center">
-                <h3 class="mb-3">Видео</h3>
-                <div class="embed-responsive-16by9 embed-responsive w-75 h-75 mx-auto">
-                    <iframe class="embed-responsive-item w-100 h-100"
-                            src="{{ model.video_lesson_link }}" allowfullscreen></iframe>
-                </div>
-            </div>
-            {% endif %}
-        {% ifequal model.author user %}
-            <div class="delete-model mb-3">
-                <form action="{% url 'gallery:remove_model' model.id %}" method="post" name="delete_model">
-                    {% csrf_token %}
-                    <div class="logout-button text-center mt-5">
-                        <button class="btn btn-dark" type="submit">Удалить</button>
+                <div class="video m mb-1 text-center">
+                    <h3 class="mb-3">Видео</h3>
+                    <div class="embed-responsive-16by9 embed-responsive w-75 h-75 mx-auto">
+                        <iframe class="embed-responsive-item w-100 h-100"
+                                src="{{ model.video_lesson_link }}" allowfullscreen></iframe>
                     </div>
-                </form>
-            </div>
-        {% endifequal %}
+                </div>
+            {% endif %}
+            {% ifequal model.author user %}
+                <div class="delete-model mb-3">
+                    <form action="{% url 'gallery:remove_model' model.id %}" method="post" name="delete_model">
+                        {% csrf_token %}
+                        <div class="logout-button text-center mt-5">
+                            <button class="btn btn-dark" type="submit">Удалить</button>
+                        </div>
+                    </form>
+                </div>
+            {% endifequal %}
         </div>
 
     </main>
+
 
 {% endblock %}

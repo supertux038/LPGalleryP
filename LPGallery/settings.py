@@ -19,7 +19,6 @@ from LPGallery import env_settings as _env
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -32,7 +31,6 @@ DEBUG = _env.DEBUG
 # DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -58,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'LPGallery.urls'
@@ -84,7 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'LPGallery.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -102,7 +100,6 @@ DATABASES = {
     #     'PORT': _env.DB_PORT
     # }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -127,7 +124,6 @@ AUTH_USER_MODEL = 'security.User'
 LOGIN_REDIRECT_URL = reverse_lazy('gallery:main')
 LOGIN_URL = '/login/'
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -144,6 +140,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -152,3 +150,13 @@ MEDIA_URL = '/media/'
 USER_AVATAR_DIRECTORY = 'user-data/images/avatars/'
 USER_MODEL_DIRECTORY = 'user-data/models'
 USER_MODEL_IMAGE_DIRECTORY = 'user-data/images/renders'
+
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = _env.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = _env.EMAIL_HOST_PASSWORD
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

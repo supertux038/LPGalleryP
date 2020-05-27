@@ -24,9 +24,9 @@ class LPModel(models.Model):
         ('П', 'Персонажи'),
     )
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey('security.User', on_delete=models.CASCADE)
     name = models.CharField(max_length=20, unique=True)
-    description = models.CharField(max_length=100)
+    description = models.CharField(max_length=400)
     small_description = models.CharField(max_length=40)
     file = models.FileField(upload_to=settings.USER_MODEL_DIRECTORY, default=settings.USER_MODEL_DIRECTORY+'404.babylon',
                             blank=False, null=False)
@@ -82,11 +82,27 @@ class Community(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
     avatar_photo = models.ImageField(upload_to=settings.USER_AVATAR_DIRECTORY, blank=True,
                                      default=settings.USER_AVATAR_DIRECTORY+'default.png', null=True)
-    users = models.ManyToManyField(User)
+    users = models.ManyToManyField('security.User')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = 'Communities'
 
 
 class Comment(models.Model):
-    on_model = models.ForeignKey(LPModel, on_delete=models.CASCADE, null=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    on_model = models.ForeignKey('LPModel', on_delete=models.CASCADE, null=True)
+    author = models.ForeignKey('security.User', on_delete=models.CASCADE)
     text = models.CharField(max_length=100)
     creation_time = models.DateTimeField()
+
+    class Meta:
+        ordering = ['creation_time']
+
+    def __str__(self):
+        return '%s on %s' % (self.author, self.creation_time.date())
+
+
+# class Lesson(models.Model):
+

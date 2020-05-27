@@ -13,7 +13,8 @@ class LPModelForm(forms.ModelForm):
     file = forms.FileField(required=True, validators=[FileExtensionValidator(allowed_extensions=['babylon'],
                                                                              message='Неверный формат файла')],
                            label='Файл модели в формате .babylon')
-    image = forms.ImageField(required=True, validators=[FileExtensionValidator(allowed_extensions=['jpg', 'png'])])
+    image = forms.ImageField(required=True, validators=[FileExtensionValidator(allowed_extensions=['jpg', 'png'],
+                                                                               message='Неверный формат файла')])
 
     class Meta:
         model = LPModel
@@ -36,3 +37,8 @@ class UpdateUserForm(UserChangeForm):
         fields = (
             'avatar_photo',
             'info')
+
+
+class CommentForm(forms.Form):
+    text = forms.Textarea()
+    model_id = forms.HiddenInput()
