@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Страница сообщества {{ community.title }}{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="container pb-5 pt-5 rounded overflow-hidden">
+            {% if community is empty %}
+                <div class="container pb-5 pt-5 text-center rounded overflow-hidden">
+                    <h1>Такого сообщества не существует</h1>
+                </div>
+            {% else %}
+                <div class="profile-header">
+                    <div class="avatar-and-nick w-100 overflow-hidden mb-5 align-content-center row pl-4">
+                        <div class="avatar col-3">
+                            <img src="{{ community.avatar_photo.url }}" width="100%"
+                                 class="rounded float-left border-light bg-light "
+                                 alt="@supertux038_avatar">
+                        </div>
+                        <div class="text-user-headers col-9 text-center">
+                            <div class="nickname">
+                                <h2>Название сообщества: {{ community.title }}</h2>
+                            </div>
+                            <div class="edit-button col-3 mx-auto mt-5">
+                                <form action="#{% url 'gallery:edit_profile' %}">
+                                    <button class="btn float-right btn-light">Вступить в сообщество</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            {% endif %}
+            {% if users %}
+                <div class="mb-5 text-center">
+                    <h3>В сообществе состоят пользователи</h3>
+                </div>
+                <ul id="authors">
+                    {% for author in users %}
+                        <li>
+                            <div class="container">
+                                <label>
+                                    <div class="author">
+                                        <div class="row">
+                                            <div class="avatar col-2">
+                                                <img src="{{ author.avatar_photo.url }}" width="100%"
+                                                        {#                                            <img src="/media/user-data/images/avatars/default.png" width="100%"#}
+                                                     class="rounded float-left border-light bg-light "
+                                                        {#                                                 alt="@{{ author.getNickname() }}_avatar">#}
+                                                     alt="@{{ author.username }}_avatar">
+                                            </div>
+                                            <div class="author-name text-center col-10 pt-4">
+                                                <a href="{% url 'gallery:user_page' author.username %}">
+                                                    <h3>{{ author.username }}</h3>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="mb-5 text-center">
+                    <h1>Пользователей еще нет</h1>
+                </div>
+            {% endif %}
+
+
+        </div>
+
+    </main>
+{% endblock %}

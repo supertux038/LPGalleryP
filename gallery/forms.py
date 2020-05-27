@@ -30,13 +30,20 @@ class LPModelForm(forms.ModelForm):
         }
 
 
-class UpdateUserForm(UserChangeForm):
+class UpdateUserForm(forms.Form):
+    info = forms.TextInput()
+    avatar_photo = forms.ImageField(validators=[FileExtensionValidator(allowed_extensions=['jpg', 'png'],
+                                                                       message='Неверный формат файла')],
+                                    required=False)
 
     class Meta:
         model = User
         fields = (
             'avatar_photo',
             'info')
+        labels = {
+            'avatar_photo': 'Картинка для аватарке в формате .jpg или .png'
+        }
 
 
 class CommentForm(forms.Form):

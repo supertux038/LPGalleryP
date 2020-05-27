@@ -17,21 +17,18 @@
                                  class="rounded float-left border-light bg-light "
                                  alt="@supertux038_avatar">
                         </div>
-                        <div class="text-user-headers col-6">
+                        <div class="text-user-headers col-6 text-center">
                             <div class="nickname">
                                 <h2>Никнейм: {{ author.username }}</h2>
                             </div>
-                            {#                            <%--                <div class="role">--%>#}
-                            {#                            <%--                    <h4>User</h4>--%>#}
-                            {#                            <%--                </div>--%>#}
                         </div>
-                        {% if user == author %}
-                            <div class="edit-button col-3">
-                                <form action="{% url 'gallery:edit_profile' %}">
-                                    <button class="btn float-right btn-light">Редактировать профиль</button>
-                                </form>
-                            </div>
-                        {% endif %}
+{#                        {% if user == author %}#}
+{#                            <div class="edit-button col-3">#}
+{#                                <form action="{% url 'gallery:edit_profile' %}">#}
+{#                                    <button class="btn float-right btn-light">Редактировать профиль</button>#}
+{#                                </form>#}
+{#                            </div>#}
+{#                        {% endif %}#}
                     </div>
                 </div>
                 {% if user == author %}

@@ -20,15 +20,9 @@
                 {#<%--                <li class="nav-item">--%>#}
                 {#<%--                    <a class="nav-link" href="#">Туториалы</a>--%>#}
                 {#<%--                </li>--%>#}
-                <li class="nav-item">
-                    {#                    ${pageContext.request.contextPath}/authors#}
-
-                    {#                    <a class="nav-link" href="{{ fullUri("/authors") }}">Авторы</a>#}
-
-                </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="/userPage/{{ user.username }}">Мои модели</a>
+                        <a class="nav-link" href="/userPage/{{ user.username }}">Моя страница</a>
                         {#                    ${pageContext.request.contextPath}/${lk_link}#}
                         {#                    <a class="nav-link" href="">Мои модели</a>#}
                     </li>

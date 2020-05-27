@@ -1,27 +1,25 @@
-from datetime import datetime
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import generic
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView
 from rest_framework import viewsets, permissions
 
 from LPGallery import env_settings as _env
-from gallery.forms import LPModelForm, UpdateUserForm, CommentForm
+from gallery.forms import LPModelForm, UpdateUserForm
 from gallery.models import LPModel, Comment, Community, MainPage
-from security.models import User
 from gallery.serializers import CommunitySerializer, LPModelSerializer, CommentSerializer, MainPageSerializer
+from security.models import User
 
 
 @login_required
 def user_page(request, username=None):
     if username is not None:
-        print(username)
         try:
             user = User.objects.get(username=username)
         except ObjectDoesNotExist:
@@ -44,8 +42,17 @@ def model(request, num):
     return render(request, 'gallery/model-page.html', {'model': lp_model, 'comments': comments})
 
 
-def communities(request):
-    return render(request, '500.html')
+class CommunityListView(ListView):
+    model = Community
+    template_name = 'gallery/communities.html'
+    context_object_name = 'communities'
+
+
+def community_page(request, com_id):
+    community = Community.objects.get(id=com_id)
+    users = User.objects.filter(community=community).order_by('-username')
+    users_amount = users.count()
+    return render(request, 'gallery/community-page.html', {'community': community, 'users': users, 'users_amount': users_amount})
 
 
 def models(request, param=None, argument=None):
@@ -67,10 +74,39 @@ class AuthorList(ListView):
     context_object_name = 'authors'
 
 
-class UserUpdate(UpdateView):
-    model = User
-    fields = ['info', 'avatar_photo']
-    template_name_suffix = '_update_form'
+# class UserUpdate(UpdateView):
+#     form_class = UpdateUserForm
+#     model = User
+#     fields = ['info', 'avatar_photo']
+#     template_name_suffix = '_update'
+#     success_url = reverse_lazy('userPage')
+
+
+def edit_profile(request):
+    form = UpdateUserForm()
+    if request.method == 'POST':
+        user = request.user
+        info = request.POST['info']
+        image = request.FILES.get('avatar_image')
+        fs = FileSystemStorage()
+        fs.save(image.name, image)
+        user.info = info
+        if image is not None:
+            user.avatar_photo = image
+        user.save()
+        return redirect('gallery:user_page', request.user)
+
+    elif request.method == 'GET':
+        return render(request, 'gallery/user-update.html', {'form': form, 'user': request.user})
+
+
+# def update_user(request):
+#     form = UpdateUserForm
+#     if request.method == 'GET':
+#         return render(request, 'gallery/user-update.html', {'form': form, 'user': request.user})
+#     if request.method == 'POST':
+#         if form.is_valid():
+#             pass
 
 
 class AddModelView(LoginRequiredMixin, generic.FormView):
@@ -104,30 +140,10 @@ def internal_server_error_test(request):
     return render(request, '500.html')
 
 
-def edit_profile(request):
-    if request.method == 'POST':
-        form = UpdateUserForm(request.POST, instance=request.user)
-
-        if form.is_valid():
-            form.save()
-            return redirect('gallery:user_page', request.user)
-
-    else:
-        form = UpdateUserForm(request.user)
-        return render(request, 'gallery/edit-user.html', {'form': form})
-
-
 class ModelDelete(generic.DeleteView):
     model = LPModel
     success_url = reverse_lazy('gallery:user_page')
     template_name = 'gallery/model-delete.html'
-
-
-# def remove_model(request, model_id):
-#     lp_model = LPModel.objects.get(id=model_id)
-#     if lp_model.author == request.user:
-#         lp_model.delete()
-#     return redirect('gallery:user_page', request.user)
 
 
 class CommunityViewSet(viewsets.ModelViewSet):

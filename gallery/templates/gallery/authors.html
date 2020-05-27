@@ -17,7 +17,7 @@
                                                         {#                                            <img src="/media/user-data/images/avatars/default.png" width="100%"#}
                                                      class="rounded float-left border-light bg-light "
                                                         {#                                                 alt="@{{ author.getNickname() }}_avatar">#}
-                                                     alt="@SuperTux038_avatar">
+                                                     alt="@{{ author.username }}_avatar">
                                             </div>
                                             <div class="author-name text-center col-10 pt-4">
                                                 <a href="{% url 'gallery:user_page' author.username %}">

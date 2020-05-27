@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} Редактирование профиля {% endblock %}
+
+{% block content %}
+    <main>
+        {% load crispy_forms_tags %}
+
+        <div class="container w-50 py-3 px-4" id="edit_profile_form">
+            <form method="post" enctype="multipart/form-data" action="{% url 'gallery:edit_profile' %}">
+                {% csrf_token %}
+                <h1>Редактирование профиля {{ user.username }}</h1>
+                <label for="info"><h4 class="pt-3">Информация о вас</h4></label>
+                <input id="info" class="w-100" type="text" name="info">
+                {{ form|crispy }}
+                <div class="buttons text-center">
+                    <input class="btn btn-primary mt-2" type="submit" value="Обновить"/>
+                </div>
+            </form>
+            <form class="buttons text-center" action="{% url 'gallery:user_page' user %}">
+                <input class="btn btn-dark mt-2" type="submit" value="Отмена"/>
+            </form>
+        </div>
+
+        </div>
+    </main>
+{% endblock %}

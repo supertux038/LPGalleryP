@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Авторы{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="container py-5 text-center rounded overflow-hidden">
+            {% if communities %}
+                <ul id="authors">
+                    {% for community in communities %}
+                        <li>
+                            <div class="container">
+                                <label>
+                                    <div class="community">
+                                        <div class="row">
+                                            <div class="avatar col-2">
+                                                <img src="{{ community.avatar_photo.url }}"
+                                                     width="100%"
+                                                     class="rounded float-left border-light bg-light "
+                                                     alt="@{{ community.title }}_avatar">
+                                            </div>
+                                            <div class="author-name text-center col-10 pt-4">
+                                                <a href="{% url 'gallery:community_page' community.id %}">
+                                                    <h3>{{ community.title }}</h3>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="mb-5">
+                    <h1>На сайте еще нет сообществ</h1>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+{% endblock %}
