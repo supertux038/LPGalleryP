@@ -77,7 +77,7 @@ class MainPage(models.Model):
 
 
 class Community(models.Model):
-    title = models.CharField(max_length=20)
+    title = models.CharField(max_length=40)
     description = models.CharField(max_length=100)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
     avatar_photo = models.ImageField(upload_to=settings.USER_AVATAR_DIRECTORY, blank=True,

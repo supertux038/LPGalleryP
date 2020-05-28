@@ -12,7 +12,7 @@ from rest_framework import viewsets, permissions
 
 from LPGallery import env_settings as _env
 from gallery.forms import LPModelForm, UpdateUserForm
-from gallery.models import LPModel, Comment, Community, MainPage, HelpParagraph
+from gallery.models import LPModel, Comment, Community, MainPage, HelpParagraph, HelpPage
 from gallery.serializers import CommunitySerializer, LPModelSerializer, CommentSerializer, MainPageSerializer
 from security.models import User
 
@@ -171,6 +171,9 @@ class MainPageViewSet(viewsets.ModelViewSet):
 
 
 def help_page(request):
-    page = HelpParagraph.objects.get(page_title=_env.HELP_PAGE)
-    paragraphs = HelpParagraph.objects.filter(help_page=page)
-    return render(request, 'gallery/help-page.html', {'page': page, 'paragraps': paragraphs})
+    try:
+        page = HelpPage.objects.get(page_title=_env.HELP_PAGE)
+        paragraphs = HelpParagraph.objects.filter(help_page=page)
+    except ObjectDoesNotExist:
+        page = paragraphs = None
+    return render(request, 'gallery/help-page.html', {'page': page, 'paragraphs': paragraphs})
