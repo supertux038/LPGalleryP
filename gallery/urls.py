@@ -19,6 +19,7 @@ urlpatterns = [
     re_path(r'models/(?P<param>[a-zA-Z]+)/(?P<argument>[а-яА-Я]+)', views.models, name='models'),
     path('userPage/<username>', views.user_page, name='my_user_page'),
     path('editProfile', views.edit_profile, name='edit_profile'),
+    path('helpPage', views.help_page, name='help_page'),
     path('addComment', views.add_comment, name='add_comment'),
     path('404', views.page_not_found_test),
     path('500', views.internal_server_error_test)

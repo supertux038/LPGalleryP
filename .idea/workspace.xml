@@ -3,18 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="24adf380-f108-4925-974d-37860420d47d" name="Default Changelist" comment="Initial commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gallery/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/gallery/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gallery/templates/gallery/authors-test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gallery/templates/gallery/authors.html" beforeDir="false" afterPath="$PROJECT_DIR$/gallery/templates/gallery/authors.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gallery/templates/gallery/edit-user.html" beforeDir="false" afterPath="$PROJECT_DIR$/gallery/templates/gallery/user-update.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gallery/templates/gallery/user-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/gallery/templates/gallery/user-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LPGallery/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/LPGallery/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gallery/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/gallery/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gallery/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/gallery/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gallery/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/gallery/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/security/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/security/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/500.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/500.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/schedule_task.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/schedule_task.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <list id="35957db6-f629-4f06-af80-d167815e55bf" name="Revert: Initial commit" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,14 +20,14 @@
     <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/../LPGallery\exportToHTML" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.50477403">
+    <splitter split-orientation="horizontal" split-proportion="0.6053469">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/gallery/urls.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="340">
-                  <caret line="20" column="62" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="62" />
+                <state relative-caret-position="357">
+                  <caret line="21" column="56" selection-start-line="21" selection-start-column="56" selection-end-line="21" selection-end-column="56" />
                   <folding>
                     <element signature="e#0#37#0" expanded="true" />
                   </folding>
@@ -63,8 +56,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/gallery/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="199">
-                  <caret line="88" column="45" selection-start-line="88" selection-start-column="45" selection-end-line="88" selection-end-column="45" />
+                <state relative-caret-position="587">
+                  <caret line="174" column="39" selection-start-line="174" selection-start-column="39" selection-end-line="174" selection-end-column="39" />
                   <folding>
                     <element signature="e#0#57#0" expanded="true" />
                   </folding>
@@ -123,8 +116,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/LPGallery/env_settings.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="15" selection-start-line="15" selection-end-line="15" />
+                <state relative-caret-position="187">
+                  <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
                 </state>
               </provider>
             </entry>
@@ -133,14 +126,23 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/gallery/models.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1445">
-                  <caret line="85" selection-start-line="85" selection-end-line="85" />
+                <state relative-caret-position="539">
+                  <caret line="115" selection-start-line="115" selection-end-line="115" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/LPGallery/urls.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="188">
+                  <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
                 </state>
               </provider>
             </entry>
@@ -155,12 +157,12 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/security/models.py">
+            <entry file="file://$PROJECT_DIR$/LPGallery/settings.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="51">
-                  <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+                <state relative-caret-position="2412">
+                  <caret line="154" column="46" selection-start-line="154" selection-start-column="46" selection-end-line="154" selection-end-column="46" />
                   <folding>
-                    <element signature="e#0#51#0" expanded="true" />
+                    <element signature="e#310#319#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -190,13 +192,22 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/gallery/templates/gallery/user-page.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+                <state relative-caret-position="510">
+                  <caret line="30" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/requirements.txt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="423">
+                  <caret line="48" column="18" selection-end-line="59" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/gallery/templates/gallery/user-update.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="340">
@@ -215,18 +226,6 @@
                   </folding>
                 </state>
               </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/gallery/templates/views/update-model.jsp">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-940" />
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/gallery/templates/views/user-page.jsp">
-              <provider selected="true" editor-type-id="text-editor" />
             </entry>
           </file>
         </leaf>
@@ -282,29 +281,29 @@
         <option value="$PROJECT_DIR$/security/serializers.py" />
         <option value="$PROJECT_DIR$/security/models.py" />
         <option value="$PROJECT_DIR$/gallery/serializers.py" />
-        <option value="$PROJECT_DIR$/gallery/models.py" />
         <option value="$PROJECT_DIR$/gallery/templates/gallery/model-page.html" />
         <option value="$PROJECT_DIR$/LPGallery/wsgi.py" />
-        <option value="$PROJECT_DIR$/LPGallery/urls.py" />
         <option value="$PROJECT_DIR$/LPGallery/settings.py" />
         <option value="$PROJECT_DIR$/templates/schedule_task.html" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/LPGallery/celery.py" />
         <option value="$PROJECT_DIR$/templates/security/schedule_task.html" />
         <option value="$PROJECT_DIR$/security/tasks.py" />
-        <option value="$PROJECT_DIR$/LPGallery/env_settings.py" />
         <option value="$PROJECT_DIR$/templates/500.html" />
         <option value="$PROJECT_DIR$/gallery/templates/gallery/authors.html" />
         <option value="$PROJECT_DIR$/gallery/templates/gallery/communities.html" />
-        <option value="$PROJECT_DIR$/gallery/urls.py" />
         <option value="$PROJECT_DIR$/gallery/templates/gallery/community-page.html" />
         <option value="$PROJECT_DIR$/templates/navigation.html" />
-        <option value="$PROJECT_DIR$/gallery/templates/gallery/user-page.html" />
         <option value="$PROJECT_DIR$/gallery/templates/gallery/edit-user.html" />
         <option value="$PROJECT_DIR$/gallery/templates/gallery/user_update.html" />
         <option value="$PROJECT_DIR$/gallery/forms.py" />
         <option value="$PROJECT_DIR$/security/forms.py" />
         <option value="$PROJECT_DIR$/gallery/templates/gallery/user-update.html" />
+        <option value="$PROJECT_DIR$/gallery/templates/gallery/user-page.html" />
+        <option value="$PROJECT_DIR$/LPGallery/urls.py" />
+        <option value="$PROJECT_DIR$/gallery/models.py" />
+        <option value="$PROJECT_DIR$/gallery/urls.py" />
+        <option value="$PROJECT_DIR$/LPGallery/env_settings.py" />
         <option value="$PROJECT_DIR$/gallery/views.py" />
       </list>
     </option>
@@ -349,7 +348,25 @@
             <path>
               <item name="LPGallery" type="b2602c69:ProjectViewProjectNode" />
               <item name="LPGallery" type="462c0819:PsiDirectoryNode" />
+              <item name="LPGallery" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LPGallery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LPGallery" type="462c0819:PsiDirectoryNode" />
               <item name="media" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LPGallery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LPGallery" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="user-data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LPGallery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LPGallery" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="user-data" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LPGallery" type="b2602c69:ProjectViewProjectNode" />
@@ -457,12 +474,12 @@
       <workItem from="1590043529652" duration="6828000" />
       <workItem from="1590182391132" duration="6844000" />
       <workItem from="1590258915108" duration="2218000" />
-      <workItem from="1590487892557" duration="58785000" />
+      <workItem from="1590487892557" duration="61932000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="144365000" />
+    <option name="totallyTimeSpent" value="147512000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -739,33 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LPGallery/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="66" column="82" selection-start-line="66" selection-start-column="82" selection-end-line="66" selection-end-column="82" />
-          <folding>
-            <element signature="e#633#665#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LPGallery/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="154" column="46" selection-start-line="154" selection-start-column="46" selection-end-line="154" selection-end-column="46" />
-          <folding>
-            <element signature="e#310#319#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="35" column="15" selection-start-line="35" selection-start-column="15" selection-end-line="35" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/security/schedule_task.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -790,13 +780,6 @@
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LPGallery/env_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
@@ -870,16 +853,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gallery/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="85" selection-start-line="85" selection-end-line="85" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gallery/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="403">
@@ -900,23 +873,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gallery/templates/gallery/user-page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="62" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="62" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gallery/templates/gallery/user-update.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -924,10 +880,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gallery/templates/gallery/user-page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LPGallery/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2412">
+          <caret line="154" column="46" selection-start-line="154" selection-start-column="46" selection-end-line="154" selection-end-column="46" />
+          <folding>
+            <element signature="e#310#319#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="48" column="18" selection-end-line="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LPGallery/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="115" selection-start-line="115" selection-end-line="115" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="56" selection-start-line="21" selection-start-column="56" selection-end-line="21" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LPGallery/env_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gallery/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="88" column="45" selection-start-line="88" selection-start-column="45" selection-end-line="88" selection-end-column="45" />
+        <state relative-caret-position="587">
+          <caret line="174" column="39" selection-start-line="174" selection-start-column="39" selection-end-line="174" selection-end-column="39" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
           </folding>

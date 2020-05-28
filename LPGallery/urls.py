@@ -19,7 +19,6 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
-from rest_framework_swagger.views import get_swagger_view
 from rest_framework import permissions, routers
 
 from gallery.views import CommunityViewSet, LPModelViewSet, CommentViewSet, MainPageViewSet
@@ -54,7 +53,6 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
-swagger_schema_view = get_swagger_view(title='LPGallery API')
 
 urlpatterns += [
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),

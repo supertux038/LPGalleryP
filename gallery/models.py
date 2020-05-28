@@ -104,5 +104,14 @@ class Comment(models.Model):
         return '%s on %s' % (self.author, self.creation_time.date())
 
 
-# class Lesson(models.Model):
+class HelpPage(models.Model):
+    page_title = models.CharField(max_length=30)
+    video_lesson = models.URLField(max_length=100, blank=True)
+
+
+class HelpParagraph(models.Model):
+    help_page = models.ForeignKey('HelpPage', on_delete=models.CASCADE)
+    tip_title = models.CharField(max_length=30)
+    tip_text = models.CharField(max_length=300)
+
 
